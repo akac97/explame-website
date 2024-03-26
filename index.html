@@ -60,7 +60,7 @@
     </header>
     <section id="contacts">
         <p id="email">your-email@example.com</p>
-        <button onclick="copyEmail()">Copy Email</button>
+        <button id="copyButton" onclick="copyEmail()">Copy Email</button>
     </section>
     <section id="story">
         <!-- Your story goes here -->
@@ -68,8 +68,14 @@
     <script>
         function copyEmail() {
             var email = document.getElementById('email').innerText;
+            var copyButton = document.getElementById('copyButton');
             navigator.clipboard.writeText(email).then(function() {
-                alert('Email copied to clipboard');
+                copyButton.innerText = 'Copied!';
+                copyButton.style.backgroundColor = 'green';
+                setTimeout(function() {
+                    copyButton.innerText = 'Copy Email';
+                    copyButton.style.backgroundColor = '#008CBA'; // Original color
+                }, 2000); // Switch back after 2 seconds
             }).catch(function() {
                 alert('Failed to copy email');
             });
